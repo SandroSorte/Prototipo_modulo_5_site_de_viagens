@@ -1,0 +1,5 @@
+package com.vf.repository;
+
+public class Cliente {
+
+}

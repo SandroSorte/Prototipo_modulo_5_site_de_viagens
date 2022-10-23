@@ -1,0 +1,26 @@
+package com.vf.serviceImpl;
+
+import java.util.Optional;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.vf.exception.ErroMensagemException;
+import com.vf.model.Cliente;
+import com.vf.repository.ClienteRepository;
+
+@Service
+public class ClienteServiceImpl implements Service{
+	
+	@Autowired
+	private ClienteRepository repo;
+	
+	public Cliente findById(Long id) {
+		
+		Optional<Cliente> obj = repo.findById(id);
+		return obj.orElseThrow(() -> new ErroMensagemException("Cliente não encontrado!"));
+	}
+	
+	
+
+}

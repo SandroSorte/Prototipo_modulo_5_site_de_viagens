@@ -1,0 +1,13 @@
+package com.api.viagensfantasticas;
+
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+public class ViagensFantasticasM5Application {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ViagensFantasticasM5Application.class, args);
+	}
+
+}

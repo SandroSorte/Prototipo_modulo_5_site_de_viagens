@@ -1,0 +1,11 @@
+package com.vf.service;
+
+import com.vf.model.Cliente;
+
+public interface ClienteService {
+	
+	Cliente findById(Long id);
+	
+	Cliente create(Cliente obj);
+
+}
