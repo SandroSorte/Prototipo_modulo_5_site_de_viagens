@@ -42,7 +42,7 @@ public class ClienteController {
 	}
 	
 	
-	@PostMapping("/cadastrar")
+	@PostMapping
 	public ResponseEntity<Cliente> create(@RequestBody Cliente obj){
 		return new ResponseEntity <Cliente>(service.create(obj), HttpStatus.CREATED);
 	}
