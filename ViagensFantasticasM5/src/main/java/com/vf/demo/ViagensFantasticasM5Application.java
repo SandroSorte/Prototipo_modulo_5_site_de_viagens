@@ -8,7 +8,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @EntityScan(basePackages = {"com.vf.model."})
 @EnableJpaRepositories(basePackages = {"com.vf.repository"})
-@ComponentScan(basePackages = {"com.vf.controller", "com.vf.serviceImpl, com.vf.service"})
+@ComponentScan(basePackages = {"com.vf.controller", "com.vf.serviceImpl", "com.vf.security","com.vf.service"})
 @SpringBootApplication
 public class ViagensFantasticasM5Application {
 

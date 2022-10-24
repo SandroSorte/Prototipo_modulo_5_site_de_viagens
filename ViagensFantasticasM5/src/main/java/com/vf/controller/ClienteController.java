@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,19 +27,22 @@ public class ClienteController {
 	@Autowired
 	private ClienteServiceImpl service;
 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/{id}")
 	public ResponseEntity<Cliente>findById(@PathVariable Long id) { 
 		Cliente obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping
 	public ResponseEntity <List<Cliente>> findAll(){
 		List<Cliente> obj = service.findAll();
 		return ResponseEntity.ok().body(obj);
 	}
 	
-	@PostMapping
+	
+	@PostMapping("/cadastrar")
 	public ResponseEntity<Cliente> create(@RequestBody Cliente obj){
 		return new ResponseEntity <Cliente>(service.create(obj), HttpStatus.CREATED);
 	}
@@ -49,6 +53,7 @@ public class ClienteController {
 		return ResponseEntity.ok().body(newObj);
 	}
 	
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@DeleteMapping("/{id}")
 	public ResponseEntity <String> delete(@PathVariable Long id){
 		service.delete(id);
