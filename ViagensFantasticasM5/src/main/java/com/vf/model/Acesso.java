@@ -1,40 +1,39 @@
 package com.vf.model;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.springframework.security.core.GrantedAuthority;
-
-import com.vf.enums.RoleName;
-
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
 @Table(name = "acesso")
 @AllArgsConstructor
 @NoArgsConstructor
-@Data
-public class Acesso implements GrantedAuthority {
-	private static final long serialVersionUID = 1L;
+public class Acesso {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	private String tipo_acesso;
 	
-	@Enumerated(EnumType.STRING)
-	@Column(nullable = false, unique = true)
-	private RoleName rolename;
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
+	}
+	public String getTipo_acesso() {
+		return tipo_acesso;
+	}
+	public void setTipo_acesso(String tipo_acesso) {
+		this.tipo_acesso = tipo_acesso;
+	}
 
-	@Override
-	public String getAuthority() {
-		return this.rolename.toString();
+	public Acesso(Long id) {
+	this.id = id;
+		
 	}
 }

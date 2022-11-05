@@ -25,7 +25,7 @@ export default function Rotas() {
         <Route path="/editar/:id" element={<EditarCadastro />} />
         <Route path="/ver/:id" element={<ViewsClientes />} />
         <Route path="/redesenha" element={<RedeSenha />}/>
-        <Route path="*" element={<h2> Página não encontrada</h2>} />
+        <Route path="*" element={<Home/>} />
       </Routes>
     </Router>
   )

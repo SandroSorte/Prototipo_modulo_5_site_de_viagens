@@ -1,5 +1,0 @@
-package com.vf.repository;
-
-public interface ClienteRepository {
-
-}

@@ -2,6 +2,7 @@ package com.vf.service;
 
 import java.util.List;
 import com.vf.model.Cliente;
+import com.vf.model.dto.ClienteAcessoDto;
 
 public interface ClienteService {
 	
@@ -9,11 +10,13 @@ public interface ClienteService {
 	
 	List<Cliente> findAll();
 	
-	Cliente create(Cliente obj);
-	
 	Cliente update(Long id, Cliente Obj);
 	
 	void delete (Long id);
+
+	Cliente create(Cliente obj);
+
+	Cliente save(Cliente cliente);
 	
 
 }

@@ -1,50 +1,48 @@
 package com.vf.security;
 
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
+import static org.springframework.security.config.Customizer.withDefaults;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.stereotype.Component;
 
-@EnableGlobalMethodSecurity(prePostEnabled = true)
+
 @Configuration
+@EnableWebSecurity
+@EnableMethodSecurity
+@Component
 public class SecurityWeb {
-	
+	 
 	@Autowired
-	ClienteDetailsService userDetailsService;
+	private final ClienteDetailsService details;
 	
-	@Bean
-	public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
-		
-		/*return http.csrf().disable().authorizeRequests(auth -> auth
-				.antMatchers("/", "/vf/cliente/cadastrar").permitAll()
-				.anyRequest().authenticated())
-				.httpBasic(Customizer.withDefaults())
-				.build();
-	}*/
-		
-		http
-				.httpBasic()
-				.and()
-				.authorizeHttpRequests()
-				//.antMatchers(HttpMethod.POST,"vf/cliente/cadastrar").permitAll()
-				//.antMatchers(HttpMethod.GET,"vf/cliente/**").hasRole("ADMIN")
-				//.antMatchers(HttpMethod.GET,"vf/cliente/**").hasRole("ADMIN")
-				.anyRequest().authenticated()
-				.and()
-				.csrf().disable();
-				
-		return http.build();
-    }
-	
+	public SecurityWeb(ClienteDetailsService details) {
+		this.details = details;
+	}
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
-		
 	}
 	
+	@Bean
+	public SecurityFilterChain filterChain (HttpSecurity http) throws Exception {
+		return http
+				.csrf().disable()
+				.authorizeHttpRequests(auth -> auth.antMatchers("/", "/home", "vf/cliente")
+				.permitAll()
+				.anyRequest().authenticated())
+				.userDetailsService(details)
+				.headers(headers -> headers.frameOptions().sameOrigin())
+				.httpBasic(withDefaults())
+				.build();
+	}
 }
+

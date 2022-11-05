@@ -1,13 +1,16 @@
 package com.vf.repository;
 
-import java.util.Optional;
-
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 import com.vf.model.Cliente;
 
 public interface ClienteRepository extends JpaRepository < Cliente, Long> {
 	
-	Optional <Cliente> findByUsername(String username);
+	Cliente findByUsername(String username);
+	  
+	@Query("SELECT u FROM Cliente u JOIN FETCH u.acessos WHERE u.email = :username")
+	Cliente findByUsernameFetchAcessos(@Param("username") String username);
 
 }
