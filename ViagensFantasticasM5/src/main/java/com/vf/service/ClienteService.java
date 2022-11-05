@@ -2,7 +2,6 @@ package com.vf.service;
 
 import java.util.List;
 import com.vf.model.Cliente;
-import com.vf.model.dto.ClienteAcessoDto;
 
 public interface ClienteService {
 	

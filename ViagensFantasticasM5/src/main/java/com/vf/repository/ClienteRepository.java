@@ -10,7 +10,7 @@ public interface ClienteRepository extends JpaRepository < Cliente, Long> {
 	
 	Cliente findByUsername(String username);
 	  
-	@Query("SELECT u FROM Cliente u JOIN FETCH u.acessos WHERE u.email = :username")
+	@Query("SELECT u FROM Cliente u JOIN FETCH u.acessos WHERE u.username = :username")
 	Cliente findByUsernameFetchAcessos(@Param("username") String username);
 
 }

@@ -30,7 +30,7 @@ public class AcessoServiceImpl implements AcessoService {
 			throw new Error("Cliente não encontrado;");
 		}
 		
-		acessos = clienteAcessoDto.getIdUser().stream().map(acesso -> {
+		acessos = clienteAcessoDto.getIdsAcesso().stream().map(acesso -> {
 			return new Acesso(acesso);}).collect(Collectors.toList());
 		
 		Cliente cliente = clienteExists.get();
