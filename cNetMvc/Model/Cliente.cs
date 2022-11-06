@@ -8,5 +8,5 @@ namespace cNetMvc.Model
   public string Nome { get; set; }
 
   public DateTime dataNascimento { get; set; }
- }
+}
 }

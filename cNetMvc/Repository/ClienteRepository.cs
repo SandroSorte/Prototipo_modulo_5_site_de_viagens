@@ -1,6 +1,7 @@
 
 using cNetMvc.Database;
 using cNetMvc.Model;
+using Microsoft.EntityFrameworkCore;
 
 namespace cNetMvc.Repository
 {
@@ -21,22 +22,23 @@ namespace cNetMvc.Repository
 
   public void AtualizarCliente(Cliente cliente)
   {
-   throw new NotImplementedException();
+   _context.Update(cliente);
   }
 
   public void DeletarCliente(Cliente cliente)
   {
-   throw new NotImplementedException();
+   _context.Remove(cliente);
   }
 
-  public Task<Cliente> GetClienteBYId(int id)
+  public async Task<Cliente> GetClienteBYId(int id)
   {
-   throw new NotImplementedException();
+   return await _context.Clientes
+   .Where(x => x.id == id).FirstOrDefaultAsync();
   }
 
-  public Task<IEnumerable<Cliente>> GetClientes()
+  public async Task<IEnumerable<Cliente>> GetClientes()
   {
-   throw new NotImplementedException();
+   return await _context.Clientes.ToListAsync();
   }
   public async Task<bool> SaveChangesAsync()
   {
